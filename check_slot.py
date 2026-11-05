@@ -180,7 +180,7 @@ def main():
             logging.warning("Telegram secrets not configured. Notification skipped.")
     else:
         logging.info("Result: 0 slots currently available across the next 30 days.")
-        send_telegram_alert(tg_token, tg_chat, "✅ No slots available in the next 30 days. Keep checking!")
+        # send_telegram_alert(tg_token, tg_chat, "✅ No slots available in the next 30 days. Keep checking!")
 
 
 if __name__ == "__main__":
