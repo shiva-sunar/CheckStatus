@@ -1,16 +1,12 @@
 name: Lumbini Driving License Slot Checker
 
 on:
-  schedule:
-    # Runs every 30 minutes at off-peak minutes (:17 and :47) to avoid GitHub Actions queue delays/drops at :00 and :30
-    - cron: '17,47 * * * *'
+  # Allows triggering via external cron (e.g., cron-job.org)
+  repository_dispatch:
+    types: [check-slots]
 
   # Allows manual triggering anytime from GitHub UI (Actions tab -> Run workflow)
   workflow_dispatch:
-
-  # Allows triggering via external free cron (e.g., cron-job.org) for guaranteed 100% punctuality
-  repository_dispatch:
-    types: [check-slots]
 
 jobs:
   check-slots:
