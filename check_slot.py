@@ -133,6 +133,7 @@ def main():
     tg_chat = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
     test_type = os.environ.get("TEST_TYPE", "TRIAL").strip().upper()
     days_ahead = int(os.environ.get("DAYS_AHEAD", "30"))
+    notify_on_empty = os.environ.get("NOTIFY_ON_EMPTY", "false").strip().lower() in ("true", "1", "yes")
 
     logging.info(f"Checking slots for UUID: {initial_uuid} | Type: {test_type} | Scanning: {days_ahead} days")
 
@@ -180,7 +181,12 @@ def main():
             logging.warning("Telegram secrets not configured. Notification skipped.")
     else:
         logging.info("Result: 0 slots currently available across the next 30 days.")
-        # send_telegram_alert(tg_token, tg_chat, "✅ No slots available in the next 30 days. Keep checking!")
+        if notify_on_empty and tg_token and tg_chat:
+            sent = send_telegram_alert(tg_token, tg_chat, "✅ No slots available in the next 30 days. Keep checking!")
+            if sent:
+                logging.info("Status heartbeat notification sent to Telegram.")
+            else:
+                logging.error("Failed to send status Telegram notification.")
 
 
 if __name__ == "__main__":
