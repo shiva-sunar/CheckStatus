@@ -46,7 +46,7 @@ In your GitHub repository:
    - Name: `TELEGRAM_CHAT_ID`
      - Value: *(Your numeric Chat ID from @userinfobot)*
    - *(Optional)* Name: `EDL_UUID`
-     - Value: `92a75ad3-4a1a-4ae3-8f10-5435eac485e4`
+     - Value: `92a75ad3-4a1a-4ae3-8f10-xxxxxxxx`
 
 ---
 
